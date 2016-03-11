@@ -19,6 +19,14 @@ var rtm = new RtmClient(token, {logLevel: 'debug'});
 var waiting_for_cool_response = false;
 var cool_message_user;
 
+var GENERAL_CHANNEL_ID = 'D0S56KGVB';
+
+// Set Adeebism interval to 20 minutes
+var ADEEBISM_INTERVAL = 1200000;
+
+// Adeebisms array
+var adeebisms = ['Wait, what?', 'Cool!', 'What were we talking about?', 'What\'s up guys?', 'Ladies! :wink: :kissing_heart:'];
+
 // Start the RTM client
 rtm.start();
 
@@ -38,18 +46,22 @@ rtm.on(RTM_EVENTS.MESSAGE, function (message) {
     if (message.user === cool_message_user && waiting_for_cool_response) {
         rtm.sendMessage('Oh.', message.channel);
         waiting_for_cool_response = false;
+        return;
     }
 
     if (message.text !== 'undefined') {
 
-        if (message.text.match(/(.*hey.*(<@U0S56B895>|adeebot).*$)/i)) {
-            rtm.sendMessage('Hey, <@' + message.user + '>!', message.channel)
-        }
+        var greeting = message.text.match(/(.*(hey|hi|hello|morning|afternoon).*(<@U0S56B895>|adeebot).*$)/i);
 
-        if (message.text === 'Hey <@U0S56B895>, I’ve got something cool to tell you') {
+        if (message.text === 'Hey <@U0S56B895>, I\'ve got something cool to tell you') {
             rtm.sendMessage('Really? Wow! What is it?', message.channel);
             cool_message_user = message.user;
             waiting_for_cool_response = true;
+        } else if (greeting) {
+            // Respond with same greeting
+            rtm.sendMessage(greeting[2].capitalizeFirstLetter() + ', <@' + message.user + '>!', message.channel)
+        } else {
+            rtm.sendMessage(adeebisms[0], message.channel);
         }
 
     }
@@ -70,4 +82,15 @@ rtm.on(RTM_EVENTS.CHANNEL_JOINED, function (message) {
  */
 rtm.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, function () {
     console.log("Connected");
+
+    // Send random Adeebism every set interval
+    setInterval(function() {
+        var selected_adeebism = Math.floor(Math.random() * adeebisms.length);
+        rtm.sendMessage(adeebisms[selected_adeebism], GENERAL_CHANNEL_ID);
+    }, ADEEBISM_INTERVAL);
+
 });
+
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
