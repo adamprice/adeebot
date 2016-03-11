@@ -35,19 +35,23 @@ rtm.on(RTM_EVENTS.MESSAGE, function (message) {
 
     console.log("On Message");
 
-    if (message.text === 'Hey <@U0S56B895>') {
-        rtm.sendMessage('Hey, <@' + message.user + '>!', message.channel)
-    }
-
     if (message.user === cool_message_user && waiting_for_cool_response) {
         rtm.sendMessage('Oh.', message.channel);
         waiting_for_cool_response = false;
     }
 
-    if (message.text === 'Hey <@U0S56B895>, I’ve got something cool to tell you') {
-        rtm.sendMessage('Really? Wow! What is it?', message.channel);
-        cool_message_user = message.user;
-        waiting_for_cool_response = true;
+    if (message.text !== 'undefined') {
+
+        if (message.text.match(/(.*hey.*(<@U0S56B895>|adeebot).*$)/i)) {
+            rtm.sendMessage('Hey, <@' + message.user + '>!', message.channel)
+        }
+
+        if (message.text === 'Hey <@U0S56B895>, I’ve got something cool to tell you') {
+            rtm.sendMessage('Really? Wow! What is it?', message.channel);
+            cool_message_user = message.user;
+            waiting_for_cool_response = true;
+        }
+
     }
 
 });
