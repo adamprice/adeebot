@@ -1,0 +1,29 @@
+{
+  "name": "adeebot",
+  "version": "1.0.0",
+  "description": "A bit like Transcendence, but with Adeeb.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priceadam/adeebot.git"
+  },
+  "keywords": [
+    "adeebot",
+    "slack"
+  ],
+  "author": "Adam Price (adam@aprice.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/priceadam/adeebot/issues"
+  },
+  "homepage": "https://github.com/priceadam/adeebot#readme",
+  "dependencies": {
+    "@slack/client": "^2.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1"
+  }
+}
