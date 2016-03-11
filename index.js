@@ -36,7 +36,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function (message) {
     console.log("On Message");
 
     if (message.text === 'Hey <@U0S56B895>') {
-        rtm.sendMessage('Wait, what?', message.channel)
+        rtm.sendMessage('Hey, <@' + message.user + '>!', message.channel)
     }
 
     if (message.user === cool_message_user && waiting_for_cool_response) {
