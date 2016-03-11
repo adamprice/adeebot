@@ -1,5 +1,7 @@
 # adeebot
 
+![Adeebot](https://raw.githubusercontent.com/priceadam/adeebot/master/images/adeebot.jpg)
+
 Clone the repository.
 
 Run `npm install`
