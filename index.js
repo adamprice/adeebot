@@ -49,7 +49,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function (message) {
         return;
     }
 
-    if (message.text !== 'undefined') {
+    if (typeof message.text !== 'undefined') {
 
         var greeting = message.text.match(/(.*(hey|hi|hello|morning|afternoon).*(<@U0S56B895>|adeebot).*$)/i);
 
