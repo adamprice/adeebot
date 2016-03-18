@@ -14,18 +14,18 @@ var token = process.env.SLACK_API_TOKEN || '';
 /**
  * The Real Time Messaging client for communication with Slack
  */
-var rtm = new RtmClient(token, {logLevel: 'debug'});
+var rtm = new RtmClient(token, {logLevel: 'error'});
 
 var waiting_for_cool_response = false;
 var cool_message_user;
 
-var GENERAL_CHANNEL_ID = 'D0S56KGVB';
+var GENERAL_CHANNEL_ID = 'C0EQ31S4X';
 
-// Set Adeebism interval to 20 minutes
-var ADEEBISM_INTERVAL = 1200000;
+// Set Adeebism interval to 5 minutes
+var ADEEBISM_INTERVAL = 300000;
 
 // Adeebisms array
-var adeebisms = ['Wait, what?', 'Cool!', 'What were we talking about?', 'What\'s up guys?', 'Ladies! :wink: :kissing_heart:'];
+var adeebisms = ['Wait, what?', 'Cool!', 'What were we talking about?', 'What\'s up guys?', 'Ladies! :wink: :kissing_heart:', 'Just writing a document!'];
 
 // Start the RTM client
 rtm.start();
@@ -61,7 +61,7 @@ rtm.on(RTM_EVENTS.MESSAGE, function (message) {
             // Respond with same greeting
             rtm.sendMessage(greeting[2].capitalizeFirstLetter() + ', <@' + message.user + '>!', message.channel)
         } else {
-            rtm.sendMessage(adeebisms[0], message.channel);
+//            rtm.sendMessage(adeebisms[0], message.channel);
         }
 
     }
